@@ -1,1 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Volta pra mim — Um pedido interativo</title>
 
+  <!-- Tailwind CDN (play) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* Soft Matrix-like background */
+    body { background: radial-gradient(ellipse at center, rgba(10,10,10,1) 0%, rgba(1,1,1,1) 100%); }
+    .matrix { position: fixed; inset:0; pointer-events:none; opacity:0.08; mix-blend-mode:screen; }
+    .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.06); }
+  </style>
+</head>
+<body class="min-h-screen text-white antialiased flex items-center justify-center p-6">
+  <canvas class="matrix" id="matrixCanvas"></canvas>
+
+  <div class="max-w-3xl w-full mx-auto p-8 rounded-2xl glass shadow-2xl">
+    <h1 class="text-4xl font-extrabold mb-3">Volta pra mim?</h1>
+    <p class="mb-6 text-gray-300">Um pedido sincero e interativo. Use com cuidado — este site é emocionalmente carregado.</p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <div class="p-4 rounded-lg border border-dashed border-white/10">
+          <p id="typing" class="min-h-[5rem] text-lg"></p>
+        </div>
+
+        <div class="mt-4 flex gap-2">
+          <button id="revealBtn" class="px-4 py-2 bg-pink-600 rounded-md hover:bg-pink-500">Revelar pedido</button>
+          <button id="confettiBtn" class="px-4 py-2 bg-emerald-600 rounded-md hover:bg-emerald-500">Festejar</button>
+          <button id="secretBtn" class="px-3 py-2 border rounded-md">Segredo</button>
+        </div>
+
+        <div class="mt-4 text-sm text-gray-400">
+          Dica: o Konami code (↑↑↓↓←→←→BA) ativa um easter egg.
+        </div>
+      </div>
+
+      <div>
+        <form id="appealForm" class="space-y-3">
+          <input id="name" type="text" placeholder="Seu nome (opcional)" class="w-full p-3 rounded-md bg-black/30 border border-white/5" />
+          <textarea id="message" rows="5" placeholder="Escreva seu pedido..." class="w-full p-3 rounded-md bg-black/30 border border-white/5"></textarea>
+          <div class="flex gap-2">
+            <button type="submit" class="flex-1 px-4 py-3 bg-blue-600 rounded-md">Enviar & tocar animação</button>
+            <button id="saveLocal" type="button" class="px-4 py-3 bg-gray-700 rounded-md">Salvar local</button>
+          </div>
+        </form>
+
+        <div id="sentNotice" class="hidden mt-3 text-sm text-green-400"></div>
+      </div>
+    </div>
+
+    <hr class="my-6 border-white/5" />
+
+    <details class="text-sm">
+      <summary class="cursor-pointer">Sobre este projeto</summary>
+      <p class="mt-2 text-gray-300">Feito com HTML, Tailwind, JavaScript e um micro-backend em Python/Flask. Você pode personalizar frases, cores e efeitos.</p>
+    </details>
+  </div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
